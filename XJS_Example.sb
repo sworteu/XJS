@@ -1,0 +1,62 @@
+﻿;- Import the XJS module file
+XIncludeFile "ModuleXJS.sb"
+
+window0Title.s = ""
+window1Title.s = ""
+window2Title.s = ""
+
+UseModule XJS
+
+;- LocalStorage
+If LocalStorageSupported() 
+  
+  If window0Title = ""
+    LocalStorageSetItem("window0title", "Window 0 - LocalStorage - Resizable")
+  EndIf
+  
+  If window1Title = ""
+    LocalStorageSetItem("window1title", "Window 1 - LocalStorage")
+  EndIf
+  
+  window0Title = LocalStorageGetItem("window0title")
+  window1Title = LocalStorageGetItem("window1title")
+    
+EndIf
+
+;- SessionStorage
+If SessionStorageSupported()
+  
+  If window2Title = ""
+    SessionStorageSetItem("window2title", "Window 2 - SessionStorage")
+  EndIf
+  
+  window2Title = SessionStorageGetItem("window2title")
+  
+EndIf
+
+    
+;- Event Procedures first.
+Procedure CloseWindowEvent()
+  Debug "Closing window: " + EventWindow()
+  CloseWindow(EventWindow()) ; Close the specific window
+EndProcedure
+
+;- Open the windows
+OpenWindow(0, 100, 100, 320, 200, window0Title, #PB_Window_SizeGadget)
+OpenWindow(1, 500, 100, 320, 200, window1Title)
+OpenWindow(2, 100, 400, 320, 200, window2Title)
+
+;- Last bind the events
+BindEvent(#PB_Event_CloseWindow, @CloseWindowEvent())
+
+; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
+; CursorPosition = 13
+; FirstLine = 8
+; Folding = -
+; HtmlFilename = compiled/index.html
+; JavaScriptFilename = xjs_script.js
+; JavaScriptPath = libraries
+; CopyJavaScriptLibrary
+; EnableUnicode
+; EnableXP
+; CompileSourceDirectory

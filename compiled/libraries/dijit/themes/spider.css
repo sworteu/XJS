@@ -1,0 +1,19 @@
+
+.sbVerticalCenter {
+  position:relative;
+  display:table-cell;
+  vertical-align:middle;
+  top:0px;
+  left:0px;
+}
+
+
+.sbNoSelect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
