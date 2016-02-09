@@ -267,7 +267,6 @@ return 0;}
 return 0;
 }
 
-//
 SpiderLaunch = function() {
   spider.debug.Init();
  spider_InitFunctions();
