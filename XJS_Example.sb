@@ -48,7 +48,6 @@ OpenWindow(2, 100, 400, 320, 200, window2Title)
 
 ;- Last bind the events
 BindEvent(#PB_Event_CloseWindow, @CloseWindowEvent())
-
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
 ; CursorPosition = 13
 ; FirstLine = 8
@@ -59,4 +58,5 @@ BindEvent(#PB_Event_CloseWindow, @CloseWindowEvent())
 ; CopyJavaScriptLibrary
 ; EnableUnicode
 ; EnableXP
+; UseMainFile = XJS_Example.sb
 ; CompileSourceDirectory
