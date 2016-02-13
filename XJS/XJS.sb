@@ -3,12 +3,17 @@
 
 DeclareModule XJS
   Declare IsFunction(*function)
+  Declare Alert(msg.s)
 EndDeclareModule
 
 Module XJS
   
   Procedure.i IsFunction(*function)
     !return (typeof(p_function) == "function") ? 1 : 0;
+  EndProcedure
+  
+  Procedure Alert( msg.s )
+    !alert(v_msg);   
   EndProcedure
   
 EndModule 
@@ -29,8 +34,9 @@ CompilerIf #PB_Compiler_IsMainFile
   Procedure ButtonPressed()
     ;- Calls the module function 
     If XJS::IsFunction( @myfunction() )
-      !alert("myfunction() is a function in javascript!");
+      XJS::Alert( "myfunction is a JS function!" ) 
     Else
+      ; This is a javascript code line, giving an alert window. 
       !alert("myfunction() is NOT a function in javascript!");
     EndIf
      
@@ -45,7 +51,8 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
   
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
-; CursorPosition = 12
+; CursorPosition = 35
+; FirstLine = 18
 ; Folding = --
 ; EnableUnicode
 ; EnableXP
