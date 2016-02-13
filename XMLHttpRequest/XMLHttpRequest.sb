@@ -1,0 +1,107 @@
+﻿; Module XMLHttpRequest.
+; This module always uses async xmlhttprequest objects.
+; To get the javascript object prefix use XMLHttpRequest::#XJS_Prefix
+; If you have trouble getting the response text use the variable value XMLHttpRequest::response 
+
+DeclareModule XMLHttpRequest
+    #XJS_Prefix = "xjs_"
+    Response.s = ""
+    Status.i = 200
+    Declare Open(url.s, method.s, *event)
+    Declare Send()
+    Declare SendPOST(body.s)
+    Declare SetRequestHeader(name.s, value.s)
+    Declare SetEventListener(*Connected, *RequestReceived, *ProcessingRequest, *Finished)
+EndDeclareModule
+
+Module XMLHttpRequest
+  ;- Properties
+  Global *EventConnected = 0
+  Global *EventRequestReceived = 0
+  Global *EventProcessingRequest = 0
+  Global *EventFinished = 0
+  
+  ;- XMLHttpRequest::Open(url.s, method.s = "GET", async.i = #True)
+  ;- Creates an XMLHttpRequest using the method set ("GET", "POST" etc.) 
+  ;- The *event property is used for a point to an event handler procedure
+  Procedure Open(url.s, method.s = "GET", *FinishedEvent)
+    ;Create XMLHttpRequest and set the data
+    !var xjs_http = new XMLHttpRequest();
+    !http.onreadystatechange = function(){
+      !if(http.readyState == 1){
+        !if(typeof(f_eventconnected) == "function"){
+          !f_eventconnected();
+        !};
+      !}elseif(http.readyState == 2){
+        !if(typeof(f_eventrequestreceived) == "function"){
+          !f_eventrequestreceived();
+        !};
+      !}elseif(http.readyState == 3){
+        !if(typeof(f_eventprocessingrequest) == "function"){
+          !f_eventprocessingrequest();
+        !};
+      !}elseif(http.readystate == 4){
+        !if(typeof(f_eventfinished) == "function"){
+          !f_eventfinished();
+        !};
+      !};
+    !};
+  EndProcedure
+  
+  ;- XMLHttpRequest::Send()
+  ;- 
+  Procedure Send()
+    !xjs_http.send();
+  EndProcedure
+  
+  ;- XMLHttpRequest::SendPOST(body.s)
+  ;- 
+  Procedure SendPOST(body.s)
+    !xjs_http.send(v_body);
+  EndProcedure
+  
+  ;- XMLHttpRequest::SetRequestHeader(name.s, value.s)
+  ;- 
+  Procedure SetRequestHeader(name.s, value.s)
+    !xjs_http.setRequestHeader(v_name, v_value);
+  EndProcedure
+  
+  ;- XMLHttpRequest::SetEventListener(functionName.s)
+  ;- This must be the first procedure to be called, then the Open procedure should be called
+  Procedure SetEventListener(*Connected, *RequestReceived, *ProcessingRequest, *Finished)
+    ;- Sets the event listeners if they are set.
+    If *Connected ;- xjs_http is connected
+      *EventConnected = *Connected
+    EndIf
+    If *RequestReceived ;- xjs_http has 
+      *EventRequestReceived = *RequestReceived
+    EndIf
+    If *ProcessingRequest
+      *EventProcessingRequest = *ProcessingRequest
+    EndIf
+    If *Finished
+      *EventFinished = *Finished
+    EndIf
+  EndProcedure
+  
+EndModule
+
+
+;- EXAMPLE CODE, RUNS ONLY WHEN IT'S IN THE COMPILER SETTINGS AS THE MAIN SOURCE FILE.
+CompilerIf #PB_Compiler_IsMainFile
+  
+  If OpenWindow(0, 10, 10, 400, 200, "XMLHttpRequest Module")
+    
+    
+    
+  EndIf
+  
+CompilerEndIf
+
+
+; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
+; CursorPosition = 19
+; Folding = --
+; EnableUnicode
+; EnableXP
+; CompileSourceDirectory
