@@ -42,7 +42,6 @@ CompilerIf #PB_Compiler_IsMainFile
      
   EndProcedure
   
-  
   OpenWindow( 0, 10, 10, 500, 400, "Is Function ?" )
   ButtonGadget( 0, 10, 10, 200, 30, "Is myfunction a function?" )
   
@@ -51,7 +50,7 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
   
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
-; CursorPosition = 35
+; CursorPosition = 43
 ; FirstLine = 18
 ; Folding = --
 ; EnableUnicode

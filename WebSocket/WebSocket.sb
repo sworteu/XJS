@@ -1,21 +1,22 @@
 ﻿;- Module WebSocket
 DeclareModule WebSocket
-  
-  
+  Declare Init() ;- Ininital creation of the websocket
   
 EndDeclareModule
 
 Module WebSocket
   
-  Global ws.s = ""
-  Global prefix.s = "xjs_"
+  Global 
+  
+  Procedure Init()
+    
+  EndProcedure
   
   
   
 EndModule
-
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
-; CursorPosition = 12
+; CursorPosition = 8
 ; Folding = -
 ; EnableUnicode
 ; EnableXP

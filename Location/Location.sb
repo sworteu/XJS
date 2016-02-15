@@ -1,7 +1,41 @@
 ﻿;- Module Location
+DeclareModule Location
+  Declare.s Href()
+EndDeclareModule
 
+Module Location
+  
+  Procedure.s Href()
+    !return window.location.href;
+  EndProcedure
+  
+EndModule
+
+
+
+; *********************************
+; EXAMPLE CODE
+; *********************************
+CompilerIf #PB_Compiler_IsMainFile
+  
+  
+  Procedure ButtonPressed()
+    ;- Calls the module function 
+    TextGadget(1, 20, 50, 200, 30, Location::Href() )
+     
+  EndProcedure
+  
+  OpenWindow( 0, 10, 10, 500, 400, "Location Module" )
+  ButtonGadget( 0, 10, 10, 200, 30, "Get Location.Href()" )
+  
+  BindGadgetEvent( 0, @ButtonPressed() )
+  
+CompilerEndIf
+  
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
-; CursorPosition = 1
+; CursorPosition = 13
+; Folding = -
 ; EnableUnicode
 ; EnableXP
+; UseMainFile = Location.sb
 ; CompileSourceDirectory
