@@ -2,13 +2,36 @@
 DeclareModule WebSocket
   Declare Init() ;- Ininital creation of the websocket
   
+  
+  Declare Send() ;- 
+  Declare Close();- 
+  
 EndDeclareModule
 
 Module WebSocket
+  Global *OnClose, *OnError, *OnMessage
   
-  Global 
-  
-  Procedure Init()
+  Procedure Init(URL.s, *OnMessageEvent, *OnErrorEvent, *OnCloseEvent)
+    
+    !var xjs_websocket = new WebSocket(v_url);
+    
+    If *OnMessageEvent 
+      !xjs_websocket.onmessage = function(e){
+        !f_onmessageevent(e.data);
+      !};
+    EndIf
+    
+    If *OnErrorEvent
+      !xjs_websocket.onerror = function(e){
+        !f_onerrorevent();
+      !};
+    EndIf
+    
+    If *OnCloseEvent
+      !xjs_websocket.onclose = function(e){
+        !f_oncloseevent();
+      !};
+    EndIf
     
   EndProcedure
   
@@ -16,7 +39,8 @@ Module WebSocket
   
 EndModule
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
-; CursorPosition = 8
+; CursorPosition = 21
+; FirstLine = 4
 ; Folding = -
 ; EnableUnicode
 ; EnableXP

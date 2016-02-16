@@ -1,7 +1,15 @@
 ﻿;- Module Storage
+DeclareModule Storage
+  
+EndDeclareModule
+
+Module Storage
+  
+EndModule
 
 ; IDE Options = SpiderBasic 1.20 (MacOS X - x86)
-; CursorPosition = 1
+; CursorPosition = 8
+; Folding = -
 ; EnableUnicode
 ; EnableXP
 ; CompileSourceDirectory
